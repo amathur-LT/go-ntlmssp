@@ -48,14 +48,13 @@ func TestUsernameDomainWorkstation(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		t.Run(table.name, func(t *testing.T) {
-			tuser, tdomain := GetDomain(table.u)
-			if tuser != table.xu {
-				t.Fatalf("username not correct, expected %v got %v", tuser, table.xu)
-			}
-			if tdomain != table.xd {
-				t.Fatalf("domain not correct, expected %v got %v", tdomain, table.xd)
-			}
+		tuser, tdomain, _ := GetDomain(table.u)
+		if tuser != table.xu {
+			t.Fatalf("username not correct, expected %v got %v", tuser, table.xu)
+		}
+		if tdomain != table.xd {
+			t.Fatalf("domain not correct, expected %v got %v", tdomain, table.xd)
+		}
 
 			tb, err := NewNegotiateMessage(tdomain, table.w)
 			if err != nil {
